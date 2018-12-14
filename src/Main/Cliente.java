@@ -119,7 +119,7 @@ public class Cliente extends JFrame implements ActionListener, KeyListener {
                 bfw.write("Desconectado \r\n");
                 texto.append("Desconectado \r\n");
             } else {
-                bfw.write(Crip.Criptografa(msg, 0, Senha) + "\r\n");
+                bfw.write(Crip.Criptografar(msg, Senha) + "\r\n");
                 texto.append("VOCÊ - " + " diz -> " + txtMsg.getText() + "\r\n");
             }
         }
@@ -147,7 +147,7 @@ public class Cliente extends JFrame implements ActionListener, KeyListener {
                 }
             } else {
                 if (bfr.ready()) {
-                    msg = Crip.Criptografa(bfr.readLine(), 3000, Senha);
+                    msg = Crip.Descriptografar(bfr.readLine(), Senha);
                     String[] aux = msg.split("//narci//");
                     msg = aux[0];
                     if (msg.equals("Sair")) {

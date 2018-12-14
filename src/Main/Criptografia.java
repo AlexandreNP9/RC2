@@ -39,25 +39,16 @@ public class Criptografia {
         }
         System.out.println("ivGrande: " + ivGrande);
 
-        //deixa a senha do tamanho da mensagem a ser enviada
-        String senhaGrande = "asdfasdfasdfasdf";
-//        senhaGrande += senha.charAt(0);
-//       for (int i = 1; i < stringOriginal.length(); i++) {
-//            if (senhaGrande.length() != stringOriginal.length()) {
-//                if (i == senha.length() && senhaGrande.length() != stringOriginal.length()) {
-//                    senhaGrande += senha.charAt(i);
-//                    i = 0;
-//                    System.out.println(senhaGrande);
-//                }else{
-//                    senhaGrande += senha.charAt(i);
-//                }
-//                System.out.println(senhaGrande);
-//            }
-//            
-//
-//        }
-        System.out.println("senhaGrande: " + senhaGrande);
-
+         //deixa a senha do tamanho da mensagem a ser enviada
+        String senhaGrande = "";
+        
+        int tamanhoMensagem = stringOriginal.length();
+        for (int i = 0; i < tamanhoMensagem; i++) {
+            senhaGrande += senha;
+        }
+        senhaGrande = senhaGrande.substring(0, tamanhoMensagem);
+        System.out.println("Senha grande: " + senhaGrande);
+        
         //define o parâmetro de criptografia (XOR entre senhaGrande e ivGrande)
         String pc = "";
         for (int i = 0; i < ivGrande.length(); i++) {
@@ -80,6 +71,8 @@ public class Criptografia {
 
     String Descriptografar(String mensagemCript, String senha) {
         System.out.println("----------DESCRIPTOGRAFANDO----------");
+        System.out.println("Mensagem criptografada: " + mensagemCript);
+        System.out.println("Senha: " + senha);
 
         //obter o iv
         String ivRec = mensagemCript.substring(mensagemCript.length() - 2, mensagemCript.length());
@@ -90,16 +83,13 @@ public class Criptografia {
 
         //deixa a senha do tamanho da mensagem a ser enviada
         String senhaGrande = "";
-        senhaGrande += senha.charAt(0);
-        for (int i = 1; i < stringRecebida.length(); i++) {
-            if (senhaGrande.length() != stringRecebida.length()) {
-                if (i == senha.length() && senhaGrande.length() != stringRecebida.length()) {
-                    i = 0;
-                }
-            }
 
+        int tamanhoMensagem = stringRecebida.length();
+        for (int i = 0; i < tamanhoMensagem; i++) {
+            senhaGrande += senha;
         }
-        System.out.println("senhaGrande: " + senhaGrande);
+        senhaGrande = senhaGrande.substring(0, tamanhoMensagem);
+        System.out.println("Senha grande: " + senhaGrande);
 
         //deixa o iv do tamanho da mensagem a ser enviada
         String ivGrande = "";
@@ -131,7 +121,7 @@ public class Criptografia {
             resultado += (char) cript;
         }
         //resultado = resultado - cript;
-        System.out.println("Mensagem criptografada mais iv: " + resultado);
+        System.out.println("Mensagem descriptografada: " + resultado);
 
         return resultado;
     }
@@ -143,8 +133,8 @@ public class Criptografia {
         String senha = "asdf";
         String mensagemCriptografada = "¡©¤§Q£¤¨£53";
 
-        //String resultado = criptografia.Criptografar(s, senha);
-        String resultado = criptografia.Descriptografar(mensagemCriptografada, senha);
+        String resultado = criptografia.Criptografar(s, senha);
+        String resultado1 = criptografia.Descriptografar(mensagemCriptografada, senha);
 
     }
 
